@@ -243,20 +243,54 @@ interface IndustryCardProps {
 }
 
 function IndustryCard({ industry, className = "h-[300px]" }: IndustryCardProps) {
+  // Apply specific positioning based on industry type
+  const getContentStyles = () => {
+    switch (industry.title) {
+      case "Manufacturing":
+        return "relative z-10 h-full flex flex-col justify-center items-center text-center mr-[190px] px-[18px] py-4 pl-4";
+      case "Energy & Utility":
+        return "relative z-10 h-full flex flex-col justify-center items-center text-center ml-[200px] mr-[-1px] pt-[3px] px-4 pb-4";
+      case "Finance":
+        return "relative z-10 h-full flex flex-col justify-center items-center text-center p-4 mb-[-3px]";
+      default:
+        return "relative z-10 h-full flex flex-col justify-center items-center p-4 text-center";
+    }
+  };
+
+  const getOverlayStyles = () => {
+    switch (industry.title) {
+      case "Manufacturing":
+        return "absolute inset-0 bg-black/20 w-[350px]";
+      case "Energy & Utility":
+        return "absolute inset-0 bg-black/20";
+      default:
+        return "absolute inset-0 bg-black/20";
+    }
+  };
+
+  const getBackgroundStyles = () => {
+    switch (industry.title) {
+      case "Energy & Utility":
+        return "absolute inset-0 flex flex-col";
+      default:
+        return "absolute inset-0";
+    }
+  };
+
   return (
     <div className={`relative overflow-hidden rounded-xl bg-gray-100 shadow-sm group cursor-pointer transition-transform hover:scale-[1.02] ${className}`}>
       {/* Background Image */}
-      <div className="absolute inset-0">
+      <div className={getBackgroundStyles()}>
         <img
           src={industry.image}
           alt={industry.title}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/20"></div>
+        <div className={getOverlayStyles()}></div>
       </div>
-      
+
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col justify-center items-center p-4 text-center">
+      <div className={getContentStyles()}>
         <h3 className="text-white font-inter font-semibold text-lg leading-tight mb-1 drop-shadow-sm">
           {industry.title}
         </h3>

@@ -109,7 +109,7 @@ export default function Index() {
             ].map((item) => (
               <div
                 key={item}
-                className="px-3 py-3 text-sm font-open-sans font-semibold text-exerea-text hover:bg-gray-100 rounded-md cursor-pointer"
+                className="px-3 py-3 text-sm font-open-sans font-semibold text-exerea-text hover:bg-gray-200 hover:shadow-md rounded-lg cursor-pointer transition-all duration-200"
               >
                 {item}
               </div>
@@ -181,14 +181,14 @@ export default function Index() {
           </div>
 
           {/* Search */}
-          <div className="flex gap-2 mb-8 max-w-4xl">
-            <div className="flex-1 bg-white/80 backdrop-blur-sm rounded-lg px-4 py-2 shadow-sm">
+          <div className="flex gap-2 mb-8">
+            <div className="w-[1200px] h-[40px] bg-white/80 backdrop-blur-sm rounded-lg px-4 py-2 shadow-sm">
               <input
                 type="text"
                 placeholder="Search Agent"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                className="w-full bg-transparent text-sm text-gray-600 placeholder-gray-500 outline-none font-inter"
+                className="w-full h-full bg-transparent text-sm text-gray-600 placeholder-gray-500 outline-none font-inter"
               />
             </div>
             <button className="bg-exerea-primary text-exerea-light px-6 py-2.5 rounded-md text-sm font-open-sans font-semibold shadow-sm hover:bg-opacity-90 transition-colors">
@@ -197,7 +197,7 @@ export default function Index() {
           </div>
 
           {/* Filter Tags */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 w-[1068px] h-[32px]">
             {filters.map((filter) => {
               const isSelected =
                 filter === "All"
@@ -260,14 +260,14 @@ export default function Index() {
       </div>
 
       {/* Industry Grid */}
-      <div className="max-w-6xl mx-auto px-6 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 h-[983px]">
+      <div className="max-w-6xl mx-auto px-6 py-20 -mt-48">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 h-[1200px]">
           {/* Left Column */}
           <div className="lg:col-span-2 flex flex-col gap-3.5">
             {/* Top Row */}
             <div className="flex gap-3.5 h-[300px]">
-              <IndustryCard industry={industries[0]} />
-              <IndustryCard industry={industries[1]} />
+              <IndustryCard industry={industries[0]} className="h-[300px] flex-1" />
+              <IndustryCard industry={industries[1]} className="h-[300px] flex-1" />
             </div>
 
             {/* Healthcare Card - Full Width */}
@@ -280,10 +280,10 @@ export default function Index() {
           {/* Right Column */}
           <div className="flex flex-col gap-3.5">
             {/* Technology Card */}
-            <IndustryCard industry={industries[3]} className="h-[150px]" />
+            <IndustryCard industry={industries[3]} className="h-[143px]" />
 
             {/* Finance Card */}
-            <IndustryCard industry={industries[4]} className="h-[150px]" />
+            <IndustryCard industry={industries[4]} className="h-[143px]" />
 
             {/* Public Sector Card */}
             <IndustryCard industry={industries[6]} className="h-[300px]" />
@@ -315,9 +315,9 @@ function IndustryCard({
   const getContentStyles = () => {
     switch (industry.title) {
       case "Manufacturing":
-        return "relative z-10 h-full flex flex-col justify-center items-center text-center mr-[190px] px-[18px] py-4 pl-4";
+        return "relative z-10 h-full flex flex-col justify-center items-center text-center p-4 w-full";
       case "Energy & Utility":
-        return "relative z-10 h-full flex flex-col justify-center items-center text-center ml-[200px] mr-[-1px] pt-[3px] px-4 pb-4";
+        return "relative z-10 h-full flex flex-col justify-center items-center text-center p-4 w-full";
       case "Finance":
         return "relative z-10 h-full flex flex-col justify-center items-center text-center p-4 mb-[-3px]";
       default:
@@ -328,7 +328,7 @@ function IndustryCard({
   const getOverlayStyles = () => {
     switch (industry.title) {
       case "Manufacturing":
-        return "absolute inset-0 bg-black/20 w-[350px]";
+        return "absolute inset-0 bg-black/20";
       case "Energy & Utility":
         return "absolute inset-0 bg-black/20";
       default:
